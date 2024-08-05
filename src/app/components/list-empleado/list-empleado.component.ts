@@ -50,8 +50,6 @@ export class ListEmpleadoComponent implements OnInit {
   }
 
   announceSortChange(sortState: Sort) {
-    console.log("ESte es el sort", sortState);
-
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {
