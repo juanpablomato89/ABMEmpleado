@@ -1,6 +1,12 @@
 <mat-form-field appearance="standard">
   <mat-label>Filtro</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Filtro" #input />
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    placeholder="Filtro"
+    #input
+    autocomplete="off"
+  />
 </mat-form-field>
 
 <table
@@ -10,56 +16,97 @@
   (matSortChange)="announceSortChange($event)"
   class="mat-elevation-z8"
 >
-  <!-- Position Column -->
-  <ng-container matColumnDef="position">
+  <!-- Nombre Completo Column -->
+  <ng-container matColumnDef="nombreCompleto">
     <th
       mat-header-cell
       *matHeaderCellDef
       mat-sort-header
-      sortActionDescription="Sort by number"
+      sortActionDescription="Sort by nombre"
     >
-      No.
+      Nombre Completo
     </th>
-    <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.nombreCompleto }}</td>
   </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
+  <!-- Telefono Column -->
+  <ng-container matColumnDef="telefono">
     <th
       mat-header-cell
       *matHeaderCellDef
       mat-sort-header
       sortActionDescription="Sort by name"
     >
-      Name
+      Telefono
     </th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.telefono }}</td>
   </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="weight">
+  <!-- Correo Column -->
+  <ng-container matColumnDef="correo">
     <th
       mat-header-cell
       *matHeaderCellDef
       mat-sort-header
-      sortActionDescription="Sort by weight"
+      sortActionDescription="Sort by correo"
     >
-      Weight
+      Correo
     </th>
-    <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.correo }}</td>
   </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
+  <!-- Fecha Ingreso Column -->
+  <ng-container matColumnDef="fechaIngreso">
     <th
       mat-header-cell
       *matHeaderCellDef
       mat-sort-header
-      sortActionDescription="Sort by symbol"
+      sortActionDescription="Sort by Fecha Ingreso"
     >
-      Symbol
+      Fecha de Ingreso
     </th>
-    <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+    <td mat-cell *matCellDef="let element">
+      {{ element.fechaIngreso | date : "dd/MM/yyyy" }}
+    </td>
+  </ng-container>
+
+  <!-- Estado Civil Column -->
+  <ng-container matColumnDef="estadoCivil">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      sortActionDescription="Sort by Estado Civil"
+    >
+      Estado Civil
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.estadoCivil }}</td>
+  </ng-container>
+
+  <!-- Sexo Column -->
+  <ng-container matColumnDef="sexo">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      sortActionDescription="Sort by Sexo"
+    >
+      Sexo
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.sexo }}</td>
+  </ng-container>
+
+  <!-- Acciones Column -->
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+    <td mat-cell *matCellDef="let element; let i = index">
+      <a class="pointer-edit" (click)="editarEmpleado(i)">
+        <mat-icon>edit</mat-icon></a
+      >
+      <a class="pointer-delete" (click)="eliminarEmpleado(i)">
+        <mat-icon>delete</mat-icon></a
+      >
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

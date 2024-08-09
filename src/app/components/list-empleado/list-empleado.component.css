@@ -6,3 +6,13 @@ table {
   font-size: 14px;
   width: 100%;
 }
+
+.pointer-edit {
+  cursor: pointer;
+  color: #1878b0;
+}
+
+.pointer-delete {
+  cursor: pointer;
+  color: #e15639;
+}
