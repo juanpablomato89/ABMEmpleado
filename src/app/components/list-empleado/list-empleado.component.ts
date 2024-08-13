@@ -5,6 +5,8 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { Empleado } from 'src/app/models/empleado';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MensajeConfirmacionComponent } from '../shared/mensaje-confirmacion/mensaje-confirmacion.component';
 
 @Component({
   selector: 'app-list-empleado',
@@ -24,7 +26,8 @@ export class ListEmpleadoComponent implements OnInit {
 
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
-    private empleadoService: EmpleadoService) { }
+    private empleadoService: EmpleadoService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.cargarEmpleados();
@@ -46,14 +49,27 @@ export class ListEmpleadoComponent implements OnInit {
   }
 
   cargarEmpleados() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     this.empleados = this.empleadoService.getEmpleados();
     this.dataSource = new MatTableDataSource(this.empleados);
   }
 
   eliminarEmpleado(index: number) {
-    this.empleadoService.eliminarEmpleado(index);
-    this.cargarEmpleados();
+
+    const dialogRef = this.dialog.open(MensajeConfirmacionComponent, {
+      width: '350px',
+      data: { mensaje: 'Esta seguro que desea eliminar el empleado' },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'aceptar') {
+        this.empleadoService.eliminarEmpleado(index);
+        this.cargarEmpleados();
+      }
+    });
   }
+
   editarEmpleado(index: number) {
     throw new Error('Method not implemented.');
   }
