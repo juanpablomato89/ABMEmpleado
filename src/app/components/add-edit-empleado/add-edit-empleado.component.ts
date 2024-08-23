@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 
 @Component({
@@ -12,7 +13,17 @@ import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 })
 export class AddEditEmpleadoComponent implements OnInit {
   estadoCiviles: any[] = ['Soltero', 'Casado', 'Divorciado'];
-  constructor() { }
+  myForm: FormGroup;
+  constructor(private builder: FormBuilder) {
+    this.myForm = builder.group({
+      nombre: [''],
+      correo: [''],
+      fechaIngreso: [''],
+      telefono: [''],
+      estadoCivil: [''],
+      sexo: [''],
+    });
+  }
 
   ngOnInit(): void {
   }
