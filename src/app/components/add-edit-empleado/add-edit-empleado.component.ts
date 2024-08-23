@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 
@@ -16,7 +18,9 @@ import { EmpleadoService } from 'src/app/services/empleado.service';
 export class AddEditEmpleadoComponent implements OnInit {
   estadoCiviles: any[] = ['Soltero', 'Casado', 'Divorciado'];
   myForm: FormGroup;
-  constructor(private builder: FormBuilder, private empleadoService: EmpleadoService) {
+  constructor(private builder: FormBuilder, private empleadoService: EmpleadoService,
+    private router: Router, private _snackBar: MatSnackBar
+  ) {
     this.myForm = builder.group({
       nombre: [''],
       correo: [''],
@@ -40,6 +44,10 @@ export class AddEditEmpleadoComponent implements OnInit {
       sexo: this.myForm.get('sexo')?.value,
     }
     this.empleadoService.agregarEmpleado(empleado);
+    this.router.navigate(['/'])
+    this._snackBar.open('Empleado adicionado correctamente', 'Adicionar Empleado', {
+      duration: 2000
+    });
   }
 
 }
