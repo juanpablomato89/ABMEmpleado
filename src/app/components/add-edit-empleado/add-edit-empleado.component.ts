@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -22,12 +22,12 @@ export class AddEditEmpleadoComponent implements OnInit {
     private router: Router, private _snackBar: MatSnackBar
   ) {
     this.myForm = builder.group({
-      nombre: [''],
-      correo: [''],
-      fechaIngreso: [''],
-      telefono: [''],
-      estadoCivil: [''],
-      sexo: [''],
+      nombre: ['', [Validators.required, Validators.maxLength(20)]],
+      correo: ['', [Validators.required, Validators.email]],
+      fechaIngreso: ['', Validators.required],
+      telefono: ['', Validators.required],
+      estadoCivil: ['', Validators.required],
+      sexo: ['', Validators.required],
     });
   }
 
