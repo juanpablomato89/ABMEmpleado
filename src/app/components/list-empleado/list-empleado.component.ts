@@ -74,9 +74,4 @@ export class ListEmpleadoComponent implements OnInit {
       }
     });
   }
-
-  editarEmpleado(index: number) {
-    throw new Error('Method not implemented.');
-  }
-
 }
