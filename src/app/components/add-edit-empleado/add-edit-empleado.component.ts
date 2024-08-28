@@ -56,6 +56,7 @@ export class AddEditEmpleadoComponent implements OnInit {
     }
     this.empleadoService.agregarEmpleado(empleado);
     this.router.navigate(['/'])
+
     if (this.idEmpleado !== undefined) {
       this._snackBar.open('Empleado editado correctamente', 'Editar Empleado', {
         duration: 2000
