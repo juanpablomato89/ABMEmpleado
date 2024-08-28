@@ -55,4 +55,13 @@ export class EmpleadoService {
     return this.listEmpleado[index];
   }
 
+  editarEmpleado(empleadoEditar: Empleado, idEmpleado: number) {
+    this.listEmpleado[idEmpleado].nombreCompleto = empleadoEditar.nombreCompleto;
+    this.listEmpleado[idEmpleado].correo = empleadoEditar.correo;
+    this.listEmpleado[idEmpleado].estadoCivil = empleadoEditar.estadoCivil;
+    this.listEmpleado[idEmpleado].fechaIngreso = empleadoEditar.fechaIngreso;
+    this.listEmpleado[idEmpleado].sexo = empleadoEditar.sexo;
+    this.listEmpleado[idEmpleado].telefono = empleadoEditar.telefono;
+  }
+
 }
